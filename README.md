@@ -29,8 +29,6 @@ Users can **add, edit, delete, view flashcards** and also take a **quiz mode** w
 3. Run the main class:
 FlashcardStudyProjectMavenApplication.java
 
-yaml
-Copy code
 4. Open the app in browser:  
 👉 [http://localhost:8080](http://localhost:8080)
 

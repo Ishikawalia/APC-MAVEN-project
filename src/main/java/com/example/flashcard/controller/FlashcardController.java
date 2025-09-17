@@ -2,48 +2,84 @@ package com.example.flashcard.controller;
 
 import com.example.flashcard.model.Flashcard;
 import com.example.flashcard.service.FlashcardService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@RestController
-@RequestMapping("/api/flashcards")
+@Controller
 public class FlashcardController {
+    private final FlashcardService service;
 
-    @Autowired
-    private FlashcardService flashcardService;
-
-    // Create a new flashcard
-    @PostMapping
-    public Flashcard createFlashcard(@RequestBody Flashcard flashcard) {
-        return flashcardService.saveFlashcard(flashcard);
+    public FlashcardController(FlashcardService service) {
+        this.service = service;
     }
 
-    // Get all flashcards
-    @GetMapping
-    public List<Flashcard> getAllFlashcards() {
-        return flashcardService.getAllFlashcards();
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("flashcards", service.getAll());
+        return "index";
     }
 
-    // Get flashcard by ID
-    @GetMapping("/{id}")
-    public Optional<Flashcard> getFlashcardById(@PathVariable Long id) {
-        return flashcardService.getFlashcardById(id);
+    @GetMapping("/add")
+    public String addForm(Model model) {
+        model.addAttribute("flashcard", new Flashcard());
+        return "add";
     }
 
-    // Update flashcard
-    @PutMapping("/{id}")
-    public Flashcard updateFlashcard(@PathVariable Long id, @RequestBody Flashcard flashcard) {
-        flashcard.setId(id);
-        return flashcardService.saveFlashcard(flashcard);
+    @PostMapping("/add")
+    public String addSubmit(@ModelAttribute Flashcard flashcard) {
+        service.save(flashcard);
+        return "redirect:/";
     }
 
-    // Delete flashcard
-    @DeleteMapping("/{id}")
-    public String deleteFlashcard(@PathVariable Long id) {
-        flashcardService.deleteFlashcard(id);
-        return "Flashcard with ID " + id + " deleted successfully.";
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/quiz")
+    public String quiz(Model model) {
+        List<Flashcard> flashcards = service.getAll();
+
+        // Build shuffled options for each flashcard
+        Map<Long, List<String>> optionsMap = new HashMap<>();
+        for (Flashcard f : flashcards) {
+            List<String> opts = new ArrayList<>();
+            if (f.getAnswer() != null) opts.add(f.getAnswer());
+            if (f.getOption1() != null) opts.add(f.getOption1());
+            if (f.getOption2() != null) opts.add(f.getOption2());
+            if (f.getOption3() != null) opts.add(f.getOption3());
+
+            Collections.shuffle(opts);
+            optionsMap.put(f.getId(), opts);
+        }
+
+        model.addAttribute("flashcards", flashcards);
+        model.addAttribute("optionsMap", optionsMap);
+        return "quiz";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        Flashcard flashcard = service.findById(id);
+        model.addAttribute("flashcard", flashcard);
+        return "edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editSubmit(@PathVariable Long id, @ModelAttribute Flashcard flashcard) {
+        Flashcard existing = service.findById(id);
+        if (existing != null) {
+            existing.setQuestion(flashcard.getQuestion());
+            existing.setAnswer(flashcard.getAnswer());
+            existing.setOption1(flashcard.getOption1());
+            existing.setOption2(flashcard.getOption2());
+            existing.setOption3(flashcard.getOption3());
+            service.save(existing);
+        }
+        return "redirect:/";
     }
 }

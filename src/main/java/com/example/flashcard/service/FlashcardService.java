@@ -2,35 +2,31 @@ package com.example.flashcard.service;
 
 import com.example.flashcard.model.Flashcard;
 import com.example.flashcard.repository.FlashcardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FlashcardService {
+    private final FlashcardRepository repo;
 
-    @Autowired
-    private FlashcardRepository flashcardRepository;
-
-    // Create or Update Flashcard
-    public Flashcard saveFlashcard(Flashcard flashcard) {
-        return flashcardRepository.save(flashcard);
+    public FlashcardService(FlashcardRepository repo) {
+        this.repo = repo;
     }
 
-    // Get all flashcards
-    public List<Flashcard> getAllFlashcards() {
-        return flashcardRepository.findAll();
+    public List<Flashcard> getAll() {
+        return repo.findAll();
     }
 
-    // Get Flashcard by ID
-    public Optional<Flashcard> getFlashcardById(Long id) {
-        return flashcardRepository.findById(id);
+    public Flashcard save(Flashcard flashcard) {
+        return repo.save(flashcard);
     }
 
-    // Delete Flashcard by ID
-    public void deleteFlashcard(Long id) {
-        flashcardRepository.deleteById(id);
+    public void delete(Long id) {
+        repo.deleteById(id);
     }
+    public Flashcard findById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
+
 }

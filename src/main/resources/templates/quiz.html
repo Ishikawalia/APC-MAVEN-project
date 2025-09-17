@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Flashcard Quiz</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>🎯 Flashcard Quiz</h1>
+
+  <form id="quizForm">
+    <div th:each="q, iterStat : ${flashcards}" class="quiz-card">
+      <p th:text="${q.question}"></p>
+
+      <!-- Use shuffled options prepared in controller -->
+      <div th:each="opt : ${optionsMap[q.id]}">
+        <label>
+          <input type="radio" th:name="${'answer_' + iterStat.index}" th:value="${opt}">
+          <span th:text="${opt}"></span>
+        </label><br/>
+      </div>
+
+      <!-- Hidden field with correct answer -->
+      <input type="hidden" th:id="${'correct_' + iterStat.index}" th:value="${q.answer}">
+    </div>
+
+    <button type="button" class="btn-primary" onclick="checkAnswers()">Submit Quiz</button>
+  </form>
+
+  <p id="score"></p>
+</div>
+
+<script>
+  function checkAnswers() {
+      let total = document.querySelectorAll('.quiz-card').length;
+      let score = 0;
+
+      for (let i = 0; i < total; i++) {
+          let correct = document.getElementById('correct_' + i).value;
+          let selected = document.querySelector('input[name="answer_' + i + '"]:checked');
+          if (selected && selected.value === correct) {
+              score++;
+          }
+      }
+
+      document.getElementById('score').innerText = "Your Score: " + score + "/" + total;
+  }
+</script>
+</body>
+</html>

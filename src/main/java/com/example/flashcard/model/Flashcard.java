@@ -12,16 +12,25 @@ public class Flashcard {
     private String question;
     private String answer;
 
-    // Default constructor
-    public Flashcard() {}
+    private String option1;
+    private String option2;
+    private String option3;
 
-    // Constructor
-    public Flashcard(String question, String answer) {
-        this.question = question;
-        this.answer = answer;
+    // --- Constructors ---
+    public Flashcard() {
+        // Required by JPA
     }
 
-    // Getter & Setter for ID
+    public Flashcard(Long id, String question, String answer, String option1, String option2, String option3) {
+        this.id = id;
+        this.question = question;
+        this.answer = answer;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+    }
+
+    // --- Getters and Setters ---
     public Long getId() {
         return id;
     }
@@ -29,7 +38,6 @@ public class Flashcard {
         this.id = id;
     }
 
-    // Getter & Setter for Question
     public String getQuestion() {
         return question;
     }
@@ -37,11 +45,31 @@ public class Flashcard {
         this.question = question;
     }
 
-    // Getter & Setter for Answer
     public String getAnswer() {
         return answer;
     }
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getOption1() {
+        return option1;
+    }
+    public void setOption1(String option1) {
+        this.option1 = option1;
+    }
+
+    public String getOption2() {
+        return option2;
+    }
+    public void setOption2(String option2) {
+        this.option2 = option2;
+    }
+
+    public String getOption3() {
+        return option3;
+    }
+    public void setOption3(String option3) {
+        this.option3 = option3;
     }
 }

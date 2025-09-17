@@ -1,0 +1,203 @@
+/* Global */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Centered container for all pages */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Headings */
+h1, h2 {
+    margin-bottom: 20px;
+    color: #222;
+    font-weight: bold;
+}
+
+/* Top navigation buttons */
+.top-buttons {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Flashcard list styling */
+.flashcard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flashcard-item {
+    background: #f9f9f9;
+    padding: 18px 22px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flashcard-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.flashcard-question {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+}
+
+/* Flashcard actions */
+.flashcard-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Form Styling */
+.form-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0,123,255,0.3);
+    outline: none;
+}
+
+/* Buttons - Unified Theme */
+a, button {
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+    display: inline-block;
+}
+
+/* Primary Action Buttons */
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+.btn-primary:hover { background: #0056b3; }
+
+/* Success (Save) */
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+.btn-success:hover { background: #218838; }
+
+/* Warning (Edit / Update) */
+.btn-warning {
+    background: #ffc107;
+    color: #222;
+}
+.btn-warning:hover { background: #e0a800; color: white; }
+
+/* Danger (Delete) */
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+.btn-danger:hover { background: #b02a37; }
+
+/* Secondary (Back) */
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+.btn-secondary:hover { background: #5a6268; }
+
+/* Quiz Styling */
+.quiz-card {
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    text-align: left;
+    transition: transform 0.2s;
+}
+
+.quiz-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Quiz question */
+.quiz-card p {
+    font-size: 17px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+/* Radio options styled as cards */
+.quiz-card label {
+    display: block;
+    padding: 10px 14px;
+    margin: 8px 0;
+    background: #f0f2f5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.quiz-card label:hover {
+    background: #e6e9ef;
+    transform: translateX(5px);
+}
+
+.quiz-card input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Quiz Score */
+#score {
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    background: #eaf3ff;
+    padding: 12px;
+    border-radius: 8px;
+}

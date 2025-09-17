@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flashcard Study App</title>
+</head>
+<body>
+<h1>Flashcard Study App</h1>
+
+<!-- Form to Add Flashcard -->
+<form th:action="@{/api/flashcards}" th:object="${flashcard}" method="post">
+    <label>Question: </label>
+    <input type="text" th:field="*{question}" required/>
+    <br>
+    <label>Answer: </label>
+    <input type="text" th:field="*{answer}" required/>
+    <br>
+    <button type="submit">Add Flashcard</button>
+</form>
+
+<hr/>
+
+<!-- List Flashcards -->
+<h2>All Flashcards</h2>
+<ul>
+    <li th:each="f : ${flashcards}">
+        <b th:text="${f.question}"></b> - <span th:text="${f.answer}"></span>
+    </li>
+</ul>
+
+</body>
+</html>

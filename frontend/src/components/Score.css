@@ -1,0 +1,49 @@
+.score-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.score-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+}
+
+.no-score {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.score-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.score-card {
+  background: #f9fafb;
+  padding: 15px 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.score-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.score-username {
+  font-weight: bold;
+  font-size: 18px;
+  color: #111827;
+}
+
+.score-value {
+  font-size: 16px;
+  color: #374151;
+}
